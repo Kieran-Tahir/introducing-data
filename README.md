@@ -150,25 +150,45 @@ A persistent database needs 4 key functions: *Create, Read, Update* and *Delete*
 
 You are now going to have a go at installing and setting up your first CRUD database using the Dexie library. The following steps are taken from [these docs](https://dexie.org/docs/Tutorial/React) so if you are feeling confident, try and complete this section based on the information provided there. Remember: when it comes to data, persistence is crucial! 
 
+### *Create*
+
 - Navigate to this repo in the terminal and install dexie with ```npm install dexie``` and ```npm install dexie react-hooks```
 - Create a file in your 'src' folder called 'db.js'
 - Inside this file you will need to do 5 things: <br>
 1. Import the Dexie library: ```import Dexie from 'dexie'``` <br>
 2. Create a new Dexie database called 'myDatabase' and Export it: ```export const db = new Dexie('myDatabase')```<br>
-3. Create a new Dexie database store that outlines the structure of your data by giving it the key 'sprints' with the value '++id, name, blurb':
+3. Create a new Dexie database store that outlines the structure of your data by giving it the key 'sprintData' with the value '++id, name, blurb':
 ```
 db.version(1).stores({
-sprints: '++id, name, blurb',
+sprintData: '++id, name, blurb',
 })
 ```
-4. We now want to add some data to the 'sprints' store. To do this, Dexie requires us to perform a '```transaction```' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '```db.sprints```' that can be read and written (```"rw"```) and has these key-value pairs":
+4. We now want to add some data to the 'sprintData' store. To do this, Dexie requires us to perform a '```transaction```' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '```db.sprintData```' that can be read and written (```"rw"```) and has these key-value pairs":
 ```
-db.transaction("rw", db.sprints, () => {
-  db.sprints.add({
+db.transaction("rw", db.sprintData, () => {
+  db.sprintData.add({
     name: "Sprint 1",
     blurb: "Introduction to HTML and CSS",
   })
 ```
-5. The code above contains only one sprint, now you have to add the other sprints by repeating the function ```db.sprints.add({...)}``` for each. Remember to close the whole db.transaction function with the correct brackets at the end.
+5. The code above contains only one sprint, now you have to add the other sprints by repeating the function ```db.sprintData.add({...)}``` for each. Remember to close the whole db.transaction function with the correct brackets at the end.
 <br><br>
 Congratulations, you have now finished the *Create* part of your CRUD database! 🐐
+
+### *Read* 
+
+Import:
+```import {db} from "../db"```
+
+Import query method:
+```import { useLiveQuery } from "dexie-react-hooks"```
+
+Query:
+```
+  const sprintData = useLiveQuery(
+    () => db.sprintData.toArray()
+  )
+```
+If the query returns: ```sprintData?.map```
+
+View your data in the dev tools Application tab.

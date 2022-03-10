@@ -104,9 +104,9 @@ In this stage we are going to do two things:
 
 ### Part 1
 
-- Cut your ```const sprintData = [...]``` array out of the DashBoard.jsx file and paste it into a new file in the src folder called 'sprintData.js'.
-- Add the term ```export``` before the ```const``` at the start of the file. This allows the data on this page to be imported into other files. Click [here](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) to learn more about imports and exports.
-- Import your data into DashBoard.jsx by adding the following command to the top of the file: ```import {sprintData} from './sprintData'```
+- Cut your `const sprintData = [...]` array out of the DashBoard.jsx file and paste it into a new file in the src folder called 'sprintData.js'.
+- Add the term `export` before the `const` at the start of the file. This allows the data on this page to be imported into other files. Click [here](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) to learn more about imports and exports.
+- Import your data into DashBoard.jsx by adding the following command to the top of the file: `import {sprintData} from './sprintData'`
 
 Your sprints should still load just the same as before, the only difference is that React is looking for your data in a seperate file. Have a look in the browser to see if everything is working...
 
@@ -116,7 +116,7 @@ This part is a little more complicated so you might want to refresh your memory 
 
 - Delete the line that says <DashBoard /> inside App.jsx and say goodbye to all of your hard work in the DashBoard.jsx file 😢
 - Open up the DashBoardMapped.jsx file 
-- Inbetween the fragment ```<></>``` tags add some curly braces: ```{}```. This lets React know that it should read your code inside these braces as JavaScript.
+- Inbetween the fragment `<></>` tags add some curly braces: `{}`. This lets React know that it should read your code inside these braces as JavaScript.
 - Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of pictures in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
 - This is hard, so I have provided a cheatsheet... Your code is going to look like this:
 
@@ -134,7 +134,7 @@ This part is a little more complicated so you might want to refresh your memory 
 Basically what we are telling React here is:
 - Look into the sprintData array
 - 'Map over' that array and give each object the name 'sprint'
--  For each sprint go and return a chunk of code that contains the values assigned to the 'name' key and the 'blurb' key. This is just like what we did in Stage 2 but without the ```[0]``` array index position. Here we don't need to provide an index position because our Array.map() function is mapping out literally every object inside the array.
+-  For each sprint go and return a chunk of code that contains the values assigned to the 'name' key and the 'blurb' key. This is just like what we did in Stage 2 but without the `[0]` array index position. Here we don't need to provide an index position because our Array.map() function is mapping out literally every object inside the array.
 
 Have a look in the browser to see if everything is working... If it is, nice work! You have successfully imported some data into a React component and displayed that data using an array method that returns a JSX element! 🔥🔥🔥
 
@@ -152,18 +152,18 @@ You are now going to have a go at installing and setting up your first CRUD data
 
 ### *Create*
 
-- Navigate to this repo in the terminal and install dexie with ```npm install dexie``` and ```npm install dexie react-hooks```
+- Navigate to this repo in the terminal and install dexie with `npm install dexie` and `npm install dexie react-hooks`
 - Create a file in your 'src' folder called 'db.js'
 - Inside this file you will need to do 5 things: <br>
-1. Import the Dexie library: ```import Dexie from 'dexie'``` <br>
-2. Create a new Dexie database called 'myDatabase' and Export it: ```export const db = new Dexie('myDatabase')```<br>
+1. Import the Dexie library: `import Dexie from 'dexie'` <br>
+2. Create a new Dexie database called 'myDatabase' and Export it: `export const db = new Dexie('myDatabase')`<br>
 3. Create a new Dexie database store that outlines the structure of your data by giving it the key 'sprintData' with the value '++id, name, blurb':
 ```
 db.version(1).stores({
 sprintData: '++id, name, blurb',
 })
 ```
-4. We now want to add some data to the 'sprintData' store. To do this, Dexie requires us to perform a '```transaction```' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '```db.sprintData```' that can be read and written (```"rw"```) and has these key-value pairs":
+4. We now want to add some data to the 'sprintData' store. To do this, Dexie requires us to perform a '`transaction`' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '`db.sprintData`' that can be read and written (`"rw"`) and has these key-value pairs":
 ```
 db.transaction("rw", db.sprintData, () => {
   db.sprintData.add({
@@ -171,16 +171,16 @@ db.transaction("rw", db.sprintData, () => {
     blurb: "Introduction to HTML and CSS",
   })
 ```
-5. The code above contains only one sprint, now you have to add the other sprints by repeating the function ```db.sprintData.add({...)}``` for each. Remember to close the whole db.transaction function with the correct brackets at the end.
+5. The code above contains only one sprint, now you have to add the other sprints by repeating the function `db.sprintData.add({...)}` for each. Remember to close the whole db.transaction function with the correct brackets at the end.
 <br><br>
 Congratulations, you have now finished the *Create* part of your CRUD database! 🐐
 
 ### *Read* 
 
 Now that you have created your data, it is time to read that data. 
-- At the top of your DashBoardMapped.jsx file import your db.js file like you did with your sprintData.js file in Stage 3: ```import {db} from "../db"```
+- At the top of your DashBoardMapped.jsx file import your db.js file like you did with your sprintData.js file in Stage 3: `import {db} from "./db"`
 - To '[query](https://www.hostinger.com/tutorials/what-is-a-query)' our data we are going to use a Dexie query method called 'useLiveQuery'
-- At the top of your DashBoardMapped.jsx file import useLiveQuery: ```import {useLiveQuery} from "dexie-react-hooks"```
+- At the top of your DashBoardMapped.jsx file import useLiveQuery: `import {useLiveQuery} from "dexie-react-hooks"`
 - Create a constant called sprintData
 - This constant is going to call upon the useLiveQuery method which will run an arrow function that will turn our sprintData into an array
 - The code will look like this:
@@ -190,7 +190,21 @@ Now that you have created your data, it is time to read that data.
   )
 ```
 
+Now we need to change our `{sprintData.map(...)}` function to cater for Dexie. 
+- First we need to make our function say "Have I received any sprintData from the query? If so, map over it". We do this by adding a `?` after `sprintData`
+- Your code should now look like this: `{sprintData?.map(...)}`
+- Secondly we need to provide a key for each of our sprints. This is because in React [each child in a list should have a unique 'key' property](https://reactjs.org/docs/lists-and-keys.html#keys).
+- As Dexie gives each of our sprints a unique 'id' number, we can do this by adding `key={sprint.id}` inside the `<div>` tag at the start of our `sprint-box`.
 
-If the query returns: ```sprintData?.map```
+If everything has gone to plan you should now have your sprintData being stored in Local Storage. To view this data, open up the Dev Tools in the browser and click on the 'Application' tab. Under where it says Storage you will see 'IndexedDB' and inside that you should be able to find your database and your sprintData. It should look something like this:
 
-View your data in the dev tools Application tab.
+<img src='./public/localStorage.PNG'>
+
+You have now successfully *Created* and *Read* data inside a persistent Local Storage database, nice! 🤯
+
+If you want to keep learning, take a break then try to achieve some stretch goals...
+
+## Stretch
+
+1. *Update*
+2. *Delete*

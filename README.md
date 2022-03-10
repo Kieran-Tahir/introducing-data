@@ -177,18 +177,20 @@ Congratulations, you have now finished the *Create* part of your CRUD database! 
 
 ### *Read* 
 
-Import:
-```import {db} from "../db"```
-
-Import query method:
-```import { useLiveQuery } from "dexie-react-hooks"```
-
-Query:
+Now that you have created your data, it is time to read that data. 
+- At the top of your DashBoardMapped.jsx file import your db.js file like you did with your sprintData.js file in Stage 3: ```import {db} from "../db"```
+- To '[query](https://www.hostinger.com/tutorials/what-is-a-query)' our data we are going to use a Dexie query method called 'useLiveQuery'
+- At the top of your DashBoardMapped.jsx file import useLiveQuery: ```import {useLiveQuery} from "dexie-react-hooks"```
+- Create a constant called sprintData
+- This constant is going to call upon the useLiveQuery method which will run an arrow function that will turn our sprintData into an array
+- The code will look like this:
 ```
   const sprintData = useLiveQuery(
     () => db.sprintData.toArray()
   )
 ```
+
+
 If the query returns: ```sprintData?.map```
 
 View your data in the dev tools Application tab.

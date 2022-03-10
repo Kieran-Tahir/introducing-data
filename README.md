@@ -2,13 +2,13 @@
 
 This repo is designed to help you learn how to integrate a database into your react-app in 4 stages:
 1. Hard-code your data
-2. Move your data into an array ???
-2. Move your data into a seperate file and display it using the Array.map() method
-3. Set up 'local storage' using Dexie.
-4. Set up 'cloud storage' using MongoDB.
-
+2. Make an array of objects that stores your data
+3. Move your data into a seperate file and display it using the Array.map() method
+4. Set up 'local storage' using Dexie.
 
 ## Starting out...
+
+Open this readme file in VS Code and click ctrl+shft+v. This file will open in PREVIEW mode and will be a whole lot nicer to read...💥
 
 In this exercise you are going to be building an app that displays a list of Sprints on the screen and lets you tick a checkbox to indicate you have completed that sprint.
 
@@ -18,7 +18,7 @@ You will also see that we are using Sass to break our CSS into different files t
 Doing this makes things clearer and helps us (and others) understand our codebase better.<br>
 
 For now the only file we are going to be working in is 'DashBoard.jsx' - so open that up alongside this file in splitscreen.<br>
-If you click ctrl+shft+v now, this file will open in PREVIEW mode and will be a whole lot nicer to read...
+
 
 Enter the following commands in your terminal to get this app up and running...
 
@@ -27,7 +27,7 @@ Enter the following commands in your terminal to get this app up and running...
 #### `npm i sass`
 #### `npm start`
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser. <br>
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 🤙 <br> 
 
 ## Stage 1
 
@@ -57,11 +57,15 @@ In this next stage we are going to shift our list of sprints into an array calle
 ```
 const sprintData = [
   {
-    name: "Sprint Name",
-    blurb: "Sprint Blurb"
+    name: "Sprint 1",
+    blurb: "Introduction to HTML and CSS"
   },
   {
-    REPEAT...
+    name: "Sprint 2",
+    blurb: "Introduction to JavaScript"
+  },
+  {
+    You have to write the rest....
   }
  ]
 ```
@@ -86,3 +90,45 @@ So here we are telling React:
 - Give me the value of whatever has the 'name' key and display it inside the `<h1></h1>` tags
 - Give me the value of whatever has the 'blurb' key and display it inside the `<p></p>` tags
 
+Once you have finished replacing all of your hard-coded information with the data from your sprintData array, you have successfully integrated a 'dataset' into your front-end. Congrats! 😊<br>
+
+In the next stage we are going to spice things up a bit ... 🌶️
+
+## Stage 3
+
+In this stage we are going to do two things:
+1. Seperate our data into a different file.
+2. Remove our list of sprints and replace it with a function that uses the Array.map() method to map out a list of our sprints for us.
+
+### Part 1
+
+- Cut your ```const sprintData = [...]``` array out of the DashBoard.jsx file and paste it into a new file in the src folder called 'sprintData.js'.
+- Add the term ```export``` before the ```const``` at the start of the file. This allows the data on this page to be imported into other files. Click [here](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) to learn more about imports and exports.
+- Import your data into DashBoard.jsx by adding the following command to the top of the file: ```import {sprintData} from './sprintData'```
+
+Your sprints should still load just the same as before, the only difference is that React is looking for your data in a seperate file. Have a look in the browser to see if everything is working...
+
+### Part 2
+
+This part is a little more complicated so you might want to refresh your memory on using the [Array.map() method](https://www.freecodecamp.org/news/javascript-map-how-to-use-the-js-map-function-array-method/) and remember to save your work!
+
+- Say goodbye to all of your hard work in the DashBoard.jsx file and jump over to the DashBoardMapped.jsx file 😢
+- Inbetween the fragment (```<> </>```) tags add some curly braces (```{}```). This lets React know that it should read your code inside these braces as JavaScript.
+- Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of picture in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
+- This is hard, so I have provided a cheatsheet... Your code is going to look like this:
+
+```
+{sprintData.map(sprint => {
+  return(
+    <div className='sprint-box'>
+      <h1>{sprint.name}</h1>
+      <p>{sprint.blurb}</p>
+    </div>
+  )
+})}
+```
+
+Basically what we are telling React here is:
+- Look into the sprintData array
+- Give each object the name 'sprint'
+- For each of those sprints return a bit of code 

@@ -71,6 +71,7 @@ const sprintData = [
 ```
 This array will sit inside your 'DashBoard.jsx' file inside the above the return.<br>
 
+Nice, you have just made a type of dataset known as 'Static Storage'.
 To use this dataset you need to replace each hard-coded value with the equivalent value stored in sprintData. 
 Accessing the data for the first sprint box will look like this:
 
@@ -112,9 +113,10 @@ Your sprints should still load just the same as before, the only difference is t
 
 This part is a little more complicated so you might want to refresh your memory on using the [Array.map() method](https://www.freecodecamp.org/news/javascript-map-how-to-use-the-js-map-function-array-method/) and remember to save your work!
 
-- Say goodbye to all of your hard work in the DashBoard.jsx file and jump over to the DashBoardMapped.jsx file 😢
-- Inbetween the fragment (```<> </>```) tags add some curly braces (```{}```). This lets React know that it should read your code inside these braces as JavaScript.
-- Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of picture in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
+- Say goodbye to all of your hard work in the DashBoard.jsx file and delete the line that says <DashBoard /> inside App.jsx. 😢
+- Open up the DashBoardMapped.jsx file 
+- Inbetween the fragment ```<></>``` tags add some curly braces: ```{}```. This lets React know that it should read your code inside these braces as JavaScript.
+- Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of pictures in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
 - This is hard, so I have provided a cheatsheet... Your code is going to look like this:
 
 ```
@@ -131,4 +133,14 @@ This part is a little more complicated so you might want to refresh your memory 
 Basically what we are telling React here is:
 - Look into the sprintData array
 - Give each object the name 'sprint'
-- For each of those sprints return a bit of code 
+- For each of those sprints return a chunk of code that contains the values assigned to the 'name' key and the 'blurb' key. This is just like what we did in Stage 2 but without the ```[0]``` array index position. Here we don't need to provide an index position because our Array.map() function is mapping out literally every object inside the array.
+
+Have a look in the browser to see if everything is working... If it is, nice work! You have successfully imported some data into a React component and displayed that data using an array method that returns a JSX element! 🔥🔥🔥
+
+## Stage 4
+
+Get off your high horse, things are about to get a whole lot tougher 🤣
+
+In this section we are going to install an external library called 'Dexie' that will allow us to store our data beyond the shores of our humble VS Code island...🏝️ With Dexie will be able to store our data INSIDE the browser in what is known as 'Local Storage'.<br>
+
+This may be a little confusing to get your head around but essentially localStorage is a property that allows JavaScript sites and apps to save key-value pairs in a web browser with no expiration date. This means the data stored in the browser will persist even after the browser window is closed.

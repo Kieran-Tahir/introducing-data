@@ -1,5 +1,4 @@
 import React from "react";
-import {sprintData} from './sprintData'
 
 function DashBoard () {
 

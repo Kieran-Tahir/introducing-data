@@ -4,7 +4,7 @@ function DashBoardMapped () {
 
   return (
     <>
-    
+
     </>
   )
 }

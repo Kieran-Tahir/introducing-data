@@ -8,9 +8,10 @@ This repo is designed to help you learn how to integrate a database into your re
 
 ## Starting out...
 
-Open this readme file in VS Code and click ctrl+shft+v. This file will open in PREVIEW mode and will be a whole lot nicer to read...💥
+Before you get started, have a read of this article that answers the fundamental question: [What is data?](https://www.webopedia.com/definitions/data/)
+Now open this readme file in VS Code and click ctrl+shft+v. This file will open in PREVIEW mode and will be a whole lot nicer to read...💥
 
-In this exercise you are going to be building an app that displays a list of Sprints on the screen and lets you tick a checkbox to indicate you have completed that sprint.
+In this exercise you are going to be building an app that displays a list of Sprints on the screen.
 
 To start, begin by having a look through the repository and familiarising yourself with it's contents. <br>
 You will see that we are using React to break our app into components. <br>
@@ -22,16 +23,16 @@ For now the only file we are going to be working in is 'DashBoard.jsx' - so open
 
 Enter the following commands in your terminal to get this app up and running...
 
-#### `npm i`
-#### `npm i react`
-#### `npm i sass`
+#### `npm install`
+#### `npm install react`
+#### `npm install sass`
 #### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 🤙 <br> 
 
 ## Stage 1
 
-Firstly I want to see a list of sprints that each have a name and a 'blurb' like this:
+Firstly I want to see a list of sprints that each have a 'name' and a 'blurb' like this:
 
 - "Sprint 1" "Introduction to HTML and CSS"
 
@@ -113,7 +114,7 @@ Your sprints should still load just the same as before, the only difference is t
 
 This part is a little more complicated so you might want to refresh your memory on using the [Array.map() method](https://www.freecodecamp.org/news/javascript-map-how-to-use-the-js-map-function-array-method/) and remember to save your work!
 
-- Say goodbye to all of your hard work in the DashBoard.jsx file and delete the line that says <DashBoard /> inside App.jsx. 😢
+- Delete the line that says <DashBoard /> inside App.jsx and say goodbye to all of your hard work in the DashBoard.jsx file 😢
 - Open up the DashBoardMapped.jsx file 
 - Inbetween the fragment ```<></>``` tags add some curly braces: ```{}```. This lets React know that it should read your code inside these braces as JavaScript.
 - Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of pictures in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
@@ -132,8 +133,8 @@ This part is a little more complicated so you might want to refresh your memory 
 
 Basically what we are telling React here is:
 - Look into the sprintData array
-- Give each object the name 'sprint'
-- For each of those sprints return a chunk of code that contains the values assigned to the 'name' key and the 'blurb' key. This is just like what we did in Stage 2 but without the ```[0]``` array index position. Here we don't need to provide an index position because our Array.map() function is mapping out literally every object inside the array.
+- 'Map over' that array and give each object the name 'sprint'
+-  For each sprint go and return a chunk of code that contains the values assigned to the 'name' key and the 'blurb' key. This is just like what we did in Stage 2 but without the ```[0]``` array index position. Here we don't need to provide an index position because our Array.map() function is mapping out literally every object inside the array.
 
 Have a look in the browser to see if everything is working... If it is, nice work! You have successfully imported some data into a React component and displayed that data using an array method that returns a JSX element! 🔥🔥🔥
 
@@ -141,6 +142,33 @@ Have a look in the browser to see if everything is working... If it is, nice wor
 
 Get off your high horse, things are about to get a whole lot tougher 🤣
 
-In this section we are going to install an external library called 'Dexie' that will allow us to store our data beyond the shores of our humble VS Code island...🏝️ With Dexie will be able to store our data INSIDE the browser in what is known as 'Local Storage'.<br>
+In this section we are going to install an external library called 'Dexie' that will allow us to store our data beyond the shores of our humble VS Code island...🏝️ With Dexie we will be able to store our data INSIDE the browser in what is known as 'Local Storage'.<br>
 
-This may be a little confusing to get your head around but essentially localStorage is a property that allows JavaScript sites and apps to save key-value pairs in a web browser with no expiration date. This means the data stored in the browser will persist even after the browser window is closed.
+This may be a little confusing to get your head around but essentially 'localStorage' is a property that allows JavaScript sites and apps to save key-value pairs in a web browser with no expiration date. This means the data stored in the browser will 'persist' (hence the name of this course) even after the browser window is closed.<br>
+
+A persistent database needs 4 key functions: *Create, Read, Update* and *Delete*. When it has these 4 functions, it is known as a CRUD database. Click [here](https://www.sumologic.com/glossary/crud/) to read more about CRUD databases.
+
+You are now going to have a go at installing and setting up your first CRUD database using the Dexie library. The following steps are taken from [these docs](https://dexie.org/docs/Tutorial/React) so if you are feeling confident, try and complete this section based on the information provided there. Remember: when it comes to data, persistence is crucial! 
+
+- Navigate to this repo in the terminal and install dexie with ```npm install dexie``` and ```npm install dexie react-hooks```
+- Create a file in your 'src' folder called 'db.js'
+- Inside this file you will need to do 5 things: <br>
+1. Import the Dexie library: ```import Dexie from 'dexie'``` <br>
+2. Create a new Dexie database called 'myDatabase' and Export it: ```export const db = new Dexie('myDatabase')```<br>
+3. Create a new Dexie database store that outlines the structure of your data by giving it the key 'sprints' with the value '++id, name, blurb':
+```
+db.version(1).stores({
+sprints: '++id, name, blurb',
+})
+```
+4. We now want to add some data to the 'sprints' store. To do this, Dexie requires us to perform a '```transaction```' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '```db.sprints```' that can be read and written (```"rw"```) and has these key-value pairs":
+```
+db.transaction("rw", db.sprints, () => {
+  db.sprints.add({
+    name: "Sprint 1",
+    blurb: "Introduction to HTML and CSS",
+  })
+```
+5. The code above contains only one sprint, now you have to add the other sprints by repeating the function ```db.sprints.add({...)}``` for each. Remember to close the whole db.transaction function with the correct brackets at the end.
+<br><br>
+Congratulations, you have now finished the *Create* part of your CRUD database! 🐐

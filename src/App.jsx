@@ -1,9 +1,10 @@
 import './styles/index.scss'
+import DashBoard from './DashBoard';
 
 function App() {
   return (
     <div className="App">
-      Leshgo v1
+      <DashBoard />
     </div>
   );
 }

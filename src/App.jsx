@@ -4,7 +4,9 @@ import DashBoard from './DashBoard';
 function App() {
   return (
     <div className="App">
-      <DashBoard />
+      <div className='dashboard-container'>
+        <DashBoard /> 
+      </div>
     </div>
   );
 }

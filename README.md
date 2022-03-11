@@ -1,6 +1,6 @@
 # `Introducing Data!`
 
-This repo is designed to help you learn how to integrate a database into your react-app in 4 stages:
+This repo is designed to help you learn how about processing data in React in 4 stages:
 1. Hard-code your data
 2. Make an array of objects that stores your data
 3. Move your data into a seperate file and display it using the Array.map() method

@@ -207,4 +207,7 @@ If you want to keep learning, take a break then try to achieve some stretch goal
 ## Stretch
 
 1. *Update*
+
+Let's try to update some of our sprintData.
+
 2. *Delete*

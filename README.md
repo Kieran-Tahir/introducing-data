@@ -1,15 +1,29 @@
 # `Introducing Data!`
 
-This repo is designed to help you learn how about processing data in React in 4 stages:
+## Setup
+
+- Clone the repo onto your machine by opening the terminal at your workspace folder and typing `git clone` followed the 'SSH key'.
+- Create a new branch with `git checkout -b YOUR_NAME`
+- Open the repo with `code .`
+- Open this readme file in VS Code and click `ctrl+shft+v`. This file will open in PREVIEW mode and will be a whole lot nicer to read...💥
+- Enter the following commands in your terminal to get this app up and running...
+
+  #### `npm install`
+  #### `npm install react`
+  #### `npm install sass`
+  #### `npm start`
+
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 🤙 <br> 
+
+## Overview
+
+This repo is designed to help you learn how to integrate a database into your react-app in 4 stages:
 1. Hard-code your data
 2. Make an array of objects that stores your data
 3. Move your data into a seperate file and display it using the Array.map() method
 4. Set up 'local storage' using Dexie.
 
-## Starting out...
-
-Before you get started, have a read of this article that answers the fundamental question: [What is data?](https://www.webopedia.com/definitions/data/)
-Now open this readme file in VS Code and click ctrl+shft+v. This file will open in PREVIEW mode and will be a whole lot nicer to read...💥
+Have a read of this article that answers the fundamental question: [What is data?](https://www.webopedia.com/definitions/data/)
 
 In this exercise you are going to be building an app that displays a list of Sprints on the screen.
 
@@ -19,16 +33,6 @@ You will also see that we are using Sass to break our CSS into different files t
 Doing this makes things clearer and helps us (and others) understand our codebase better.<br>
 
 For now the only file we are going to be working in is 'DashBoard.jsx' - so open that up alongside this file in splitscreen.<br>
-
-
-Enter the following commands in your terminal to get this app up and running...
-
-#### `npm install`
-#### `npm install react`
-#### `npm install sass`
-#### `npm start`
-
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 🤙 <br> 
 
 ## Stage 1
 
@@ -114,7 +118,7 @@ Your sprints should still load just the same as before, the only difference is t
 
 This part is a little more complicated so you might want to refresh your memory on using the [Array.map() method](https://www.freecodecamp.org/news/javascript-map-how-to-use-the-js-map-function-array-method/) and remember to save your work!
 
-- Delete the line that says <DashBoard /> inside App.jsx and say goodbye to all of your hard work in the DashBoard.jsx file 😢
+- Delete the line that says `<DashBoard />` inside App.jsx and say goodbye to all of your hard work in the DashBoard.jsx file 😢
 - Open up the DashBoardMapped.jsx file 
 - Inbetween the fragment `<></>` tags add some curly braces: `{}`. This lets React know that it should read your code inside these braces as JavaScript.
 - Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of pictures in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
@@ -163,7 +167,7 @@ db.version(1).stores({
 sprintData: '++id, name, blurb',
 })
 ```
-4. We now want to add some data to the 'sprintData' store. To do this, Dexie requires us to perform a '`transaction`' function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store '`db.sprintData`' that can be read and written (`"rw"`) and has these key-value pairs":
+4. We now want to add some data to the 'sprintData' store. To do this, Dexie requires us to perform a `transaction` function as follows. This code looks confusing, but it is basically just Dexie's way of saying "add a piece of data to my database store `db.sprintData` that can be read and written (`"rw"`) and has these key-value pairs":
 ```
 db.transaction("rw", db.sprintData, () => {
   db.sprintData.add({
@@ -207,7 +211,4 @@ If you want to keep learning, take a break then try to achieve some stretch goal
 ## Stretch
 
 1. *Update*
-
-Let's try to update some of our sprintData.
-
 2. *Delete*

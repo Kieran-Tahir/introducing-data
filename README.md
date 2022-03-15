@@ -57,24 +57,32 @@ We now have some hard-coded information that our app users can read, lets start 
 
 ## Stage 2
 
-In this next stage we are going to shift our list of sprints into an array called sprintData that looks like this: <br>
+Some key things to note in this section are:
+- [Array indexing starts at 0](https://blog.kevinchisholm.com/javascript/javascript-array-length-always-one-higher/#:~:text=Arrays%20in%20JavaScript%20are%20zero,2%E2%80%9D%2C%20and%20so%20on.)
+- [Objects are made up of 'key: value' pairs](https://www.freecodecamp.org/news/javascript-object-keys-tutorial-how-to-use-a-js-key-value-pair/)
 
-```
-const sprintData = [
-  {
-    name: "Sprint 1",
-    blurb: "Introduction to HTML and CSS"
-  },
-  {
-    name: "Sprint 2",
-    blurb: "Introduction to JavaScript"
-  },
-  {
-    You have to write the rest....
-  }
- ]
-```
-This array will sit inside your 'DashBoard.jsx' file inside the above the return.<br>
+In this next stage we are going to shift our list of sprints into an array called `sprintData`. This array will contain 6 objects, each with 'name' and 'blurb' keys that correspond to the values you have already written out. This array will sit inside your 'DashBoard.jsx' file inside the above the return.<br>
+
+<details>
+  <summary>Click here to see a HINT...</summary>
+  
+  ```
+  const sprintData = [
+    {
+      name: "Sprint 1",
+      blurb: "Introduction to HTML and CSS"
+    },
+    {
+      name: "Sprint 2",
+      blurb: "Introduction to JavaScript"
+    },
+    {
+      You have to write the rest....
+    }
+  ]
+  ```
+</details>
+<br>
 
 Nice, you have just made a type of dataset known as 'Static Storage'.
 To use this dataset you need to replace each hard-coded value with the equivalent value stored in sprintData. 
@@ -86,9 +94,7 @@ Accessing the data for the first sprint box will look like this:
   <p>{sprintData[0].blurb}</p>
 </div>
 ```
-Some key things to note here are:
-- [Array indexing starts at 0](https://blog.kevinchisholm.com/javascript/javascript-array-length-always-one-higher/#:~:text=Arrays%20in%20JavaScript%20are%20zero,2%E2%80%9D%2C%20and%20so%20on.)
-- [Objects are made up of 'key: value' pairs](https://www.freecodecamp.org/news/javascript-object-keys-tutorial-how-to-use-a-js-key-value-pair/)
+
 
 So here we are telling React: 
 - Look into the sprintData array
@@ -121,8 +127,10 @@ This part is a little more complicated so you might want to refresh your memory 
 - Delete the line that says `<DashBoard />` inside App.jsx and say goodbye to all of your hard work in the DashBoard.jsx file 😢
 - Open up the DashBoardMapped.jsx file 
 - Inbetween the fragment `<></>` tags add some curly braces: `{}`. This lets React know that it should read your code inside these braces as JavaScript.
-- Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the first couple of pictures in [this example](https://linguinecode.com/post/how-to-use-map-react) to try and figure out how to do this. 
-- This is hard, so I have provided a cheatsheet... Your code is going to look like this:
+- Inside the curly braces you are going to map over your sprintData array and return a sprint-box for each object in the array. Have a look at the pictures in [this example](https://www.better.dev/react-challenge-loop-over-and-display-data-with-jsx) to try and figure out how to do this. 
+
+<details>
+  <summary>Click here to see the cheatsheet...</summary>
 
 ```
 {sprintData.map(sprint => {
@@ -134,6 +142,9 @@ This part is a little more complicated so you might want to refresh your memory 
   )
 })}
 ```
+
+</details>
+<br>
 
 Basically what we are telling React here is:
 - Look into the sprintData array
@@ -152,7 +163,7 @@ This may be a little confusing to get your head around but essentially 'localSto
 
 A persistent database needs 4 key functions: *Create, Read, Update* and *Delete*. When it has these 4 functions, it is known as a CRUD database. Click [here](https://www.sumologic.com/glossary/crud/) to read more about CRUD databases.
 
-You are now going to have a go at installing and setting up your first CRUD database using the Dexie library. The following steps are taken from [these docs](https://dexie.org/docs/Tutorial/React) so if you are feeling confident, try and complete this section based on the information provided there. Remember: when it comes to data, persistence is crucial! 
+You are now going to have a go at installing and setting up your first CRUD database using the Dexie library. The following steps are taken from [these docs](https://dexie.org/docs/Tutorial/React) so if you are feeling confident, try and complete this section based on the information provided there before opening the hints below. Remember: when it comes to data, persistence is crucial! 
 
 ### *Create*
 
@@ -208,7 +219,6 @@ You have now successfully *Created* and *Read* data inside a persistent Local St
 
 If you want to keep learning, take a break then try to achieve some stretch goals...
 
-## Stretch
+## Consolidate:
 
-1. *Update*
-2. *Delete*
+You have been contacted by DOC to make an App that displays a list of native birds. 
